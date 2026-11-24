@@ -1,0 +1,22 @@
+# Build and binary outputs
+bin/
+obj/
+App/
+Publish/
+Dist/
+*.user
+*.suo
+.vs/
+*.log
+
+# Footage and user downloads
+Footage/
+*.mp4
+*.lrv
+*.insv
+*.insp
+*.dng
+*.jpg
+__pycache__/
+*.pyc
+camera_fileinfo.bin
