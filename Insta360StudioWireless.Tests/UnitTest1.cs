@@ -247,4 +247,32 @@ public class TelemetryAndCameraTests
         Assert.NotNull(vm.BrowseDownloadFolderCommand);
         Assert.True(vm.BrowseDownloadFolderCommand.CanExecute(null));
     }
+
+    [Fact]
+    public void AdaptiveTilePanel_CalculatesFullSpanDimensions()
+    {
+        var thread = new System.Threading.Thread(() =>
+        {
+            var panel = new Insta360StudioWireless.Controls.AdaptiveTilePanel
+            {
+                MinItemWidth = 240,
+                Spacing = 6,
+                AspectRatio = 0.67
+            };
+
+            for (int i = 0; i < 5; i++)
+            {
+                panel.Children.Add(new System.Windows.FrameworkElement());
+            }
+
+            panel.Measure(new System.Windows.Size(1224, 800));
+            panel.Arrange(new System.Windows.Rect(0, 0, 1224, panel.DesiredSize.Height));
+
+            Assert.Equal(1224, panel.DesiredSize.Width);
+            Assert.True(panel.DesiredSize.Height > 0);
+        });
+        thread.SetApartmentState(System.Threading.ApartmentState.STA);
+        thread.Start();
+        thread.Join();
+    }
 }

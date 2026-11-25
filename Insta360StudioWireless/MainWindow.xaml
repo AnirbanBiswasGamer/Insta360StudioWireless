@@ -6,6 +6,7 @@
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:vm="clr-namespace:Insta360StudioWireless.ViewModels"
         xmlns:conv="clr-namespace:Insta360StudioWireless.Converters"
+        xmlns:controls="clr-namespace:Insta360StudioWireless.Controls"
         mc:Ignorable="d"
         Title="Photos - Insta360 ONE RS" 
         Icon="Assets/app_logo.png"
@@ -226,7 +227,7 @@
         <!-- ======================================================== -->
         <!-- GOOGLE PHOTOS TIMELINE (Grouped by Date)                 -->
         <!-- ======================================================== -->
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Padding="28,20,28,30">
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Padding="16,14,16,24">
             <ItemsControl ItemsSource="{Binding DateGroups}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -249,18 +250,18 @@
                                            Foreground="#9AA0A6" Margin="8,0,0,0" VerticalAlignment="Center"/>
                             </StackPanel>
 
-                            <!-- Photo & Video Tile Grid (Seamless WrapPanel, 4px gap) -->
+                            <!-- Photo & Video Tile Grid (Responsive Adaptive Grid, fills full width) -->
                             <ItemsControl ItemsSource="{Binding Items}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <WrapPanel Orientation="Horizontal" />
+                                        <controls:AdaptiveTilePanel MinItemWidth="240" AspectRatio="0.67" Spacing="6" />
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
 
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <!-- Google Photos Media Tile with smooth hover animations -->
-                                        <Border x:Name="MediaCard" Width="260" Height="175" Margin="0,0,6,6" CornerRadius="6" ClipToBounds="True"
+                                        <Border x:Name="MediaCard" CornerRadius="6" ClipToBounds="True"
                                                 Background="#16161B" Cursor="Hand"
                                                 RenderTransformOrigin="0.5,0.5">
                                             <Border.RenderTransform>
